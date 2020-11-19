@@ -14,3 +14,7 @@ export type Game = [
   Frame,
   LastFrame
 ];
+
+export interface Row {
+  col: string
+}
