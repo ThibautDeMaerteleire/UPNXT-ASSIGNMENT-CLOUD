@@ -1,3 +1,4 @@
+import { createParameter } from "typescript";
 import { Game } from "./types";
 
 export function compute(game: Game): number {
@@ -16,7 +17,8 @@ export function compute(game: Game): number {
     }
     return score;
   } catch(e) {
-    throw new Error("Work in progress."); // Throw error if something goes wrong
+    console.log(e) // Throw error if something goes wrong
+    return e;
   }
 }
 

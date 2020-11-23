@@ -13,17 +13,18 @@ app.use(express.json());
 
 app.post("/compute", async (req, res) => {
   const game: Game = req.body.game; // Validate game as Game
-  if(!game) throw new Error('Not game type.');  // Check if game isn't empty
-
+  const score = compute(game);
+  if(typeof score == 'string') res.sendStatus(406);
+  
   // Creating scoreObject
   const scoreObj = {
     id: v4(),
-    score: compute(game)
+    score: score
   };
 
   await dbActions.addScore(scoreObj); // Add scoreObject to DB
 
-  res.status(200).send({score: scoreObj.score});  // Send response
+  res.status(200).send(scoreObj);  // Send response
 });
 
 app.get("/history", async (req, res) => {
